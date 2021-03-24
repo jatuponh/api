@@ -53,7 +53,7 @@
     "/api-keys": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Get all api keys.",
         "responses": {
           "200": {
             "description": "response",
@@ -115,7 +115,7 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new api key.",
         "responses": {
           "200": {
             "description": "response",
@@ -180,13 +180,14 @@
               }
             }
           }
-        }
+        },
+        "operationId": ""
       }
     },
     "/api-keys/{id}": {
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete an api key.",
         "responses": {
           "200": {
             "description": "deletes a single record based on the ID supplied",
@@ -1993,7 +1994,8 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/NewProduct"
-              }
+              },
+              "examples": {}
             }
           }
         }
@@ -3263,6 +3265,73 @@
         }
       },
       "NewCoupon": {
+        "type": "object",
+        "properties": {
+          "discount_type": {
+            "type": "integer",
+            "default": 0,
+            "description": "Type of discount. 0 is percentage and 1 is fixed amount."
+          },
+          "discount_value": {
+            "type": "integer",
+            "default": 0,
+            "description": "Discount value. For example if you want to create coupon discount 30%. You can set discount_type is 0 and discount value is 30.\n\nOtherwise, if you want to create coupon discount 500 (usd,sgd,thb,etc.), you can set discount_type is 1 and discount value is 500."
+          },
+          "redemption_limit_per_campaign": {
+            "type": "integer",
+            "default": -1,
+            "description": "Total amount of time coupon can be redeemed. If you set 100, your customers can redeem this coupon not more than 100 times.\n\nDefault value is -1 which means unlimited."
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Coupon code such as NEWYEAR30"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Coupon name"
+          },
+          "limit_to_customers": {
+            "type": "array",
+            "description": "Specific customer can redeem this coupon.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "limit_to_products": {
+            "type": "array",
+            "description": "This coupon can be redeemed if customer's cart is including product in limit_to_products.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "end_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Coupon expired at"
+          },
+          "status": {
+            "type": "integer",
+            "default": 0,
+            "description": "Status of coupon\n0 is draft,\n1 is active,\n2 is ended,\n3 is pause,\n4 is ended"
+          },
+          "is_eligible_for_first_time_transaction": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, this coupon can be redeemed by new customer only."
+          },
+          "start_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Coupon will be redeemable after start_at date time"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Description coupon"
+          }
+        },
         "required": [
           "discount_type",
           "discount_value",
@@ -3270,61 +3339,7 @@
           "name",
           "status",
           "description"
-        ],
-        "properties": {
-          "discount_type": {
-            "type": "integer",
-            "default": 0
-          },
-          "discount_value": {
-            "type": "integer",
-            "default": 0
-          },
-          "redemption_limit_per_campaign": {
-            "type": "integer",
-            "default": -1
-          },
-          "code": {
-            "type": "string",
-            "minLength": 1
-          },
-          "name": {
-            "type": "string",
-            "minLength": 1
-          },
-          "limit_to_customers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "limit_to_products": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "end_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "type": "integer",
-            "default": 0
-          },
-          "is_eligible_for_first_time_transaction": {
-            "type": "boolean",
-            "default": false
-          },
-          "start_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "type": "string",
-            "minLength": 1
-          }
-        }
+        ]
       },
       "Customer": {
         "required": [
@@ -3354,23 +3369,28 @@
         }
       },
       "NewCustomer": {
-        "required": [
-          "email"
-        ],
+        "type": "object",
         "properties": {
           "first_name": {
-            "type": "string"
+            "type": "string",
+            "description": "First name of a new customer"
           },
           "last_name": {
-            "type": "string"
+            "type": "string",
+            "description": "Last name of a new customer"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "description": "Email of a new customer"
           },
           "phone": {
-            "type": "string"
+            "type": "string",
+            "description": "Phone of a new customer"
           }
-        }
+        },
+        "required": [
+          "email"
+        ]
       },
       "Product": {
         "required": [
@@ -3459,23 +3479,28 @@
         }
       },
       "NewProduct": {
-        "required": [
-          "name"
-        ],
+        "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of a product"
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "description": "Description of product"
           },
           "sku": {
-            "type": "string"
+            "type": "string",
+            "description": "A product code that you can use to search and identify stock in both of Hub Space and your database."
           },
           "price": {
-            "type": "number"
+            "type": "number",
+            "description": "Price of product"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "User-profile": {
         "properties": {
