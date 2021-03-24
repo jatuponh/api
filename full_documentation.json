@@ -2395,7 +2395,7 @@
           },
           "company_custom_roles": {
             "type": "array",
-                        "description": "Permissions for this key"
+                        "description": "Permissions for this key",
             "items":{
               "type":"string"
             }
