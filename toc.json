@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "type":"divider",
+      "title":"HUBSPACE | API DOCUMENTATION"
+    },
+    {
+      "type":"item",
+      "title":"Getting Started",
+      "uri":"docs/GettingStarted.md"
+    },
+    {
+      "type":"item",
+      "title":"Authentication",
+      "uri":"docs/Authentication.md"
+    },
+    {
+      "type": "item",
+      "title": "Endpoints",
+      "uri": "full_documentation.json"
+    }
+  ]
+}
