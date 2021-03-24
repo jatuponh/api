@@ -2394,8 +2394,11 @@
             "description": "Name of a new api key"
           },
           "company_custom_roles": {
-            "type": "string",
-            "description": "Permissions for this key"
+            "type": "array",
+                        "description": "Permissions for this key"
+            "items":{
+              "type":"string"
+            }
           }
         }
       },
