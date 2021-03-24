@@ -2387,15 +2387,15 @@
         }
       },
       "NewApi-key": {
+        "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of a new api key"
           },
           "company_custom_roles": {
-            "type": "string"
-          },
-          "company": {
-            "type": "string"
+            "type": "string",
+            "description": "Permissions for this key"
           }
         }
       },
@@ -2829,26 +2829,32 @@
         }
       },
       "NewCompany": {
-        "required": [
-          "name"
-        ],
+        "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of your company"
           },
           "number_of_employees": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Number of your employee\n0 is 1 - 4\n1 is 5-9\n2 is 10-49\n3 is 50-199\n4 is 200-499\n5 is 500-999\n6 is +1000 Employee"
           },
           "industry": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Industry of your company\n    0 is SaaS\n    1 is is E-Commerce\n    2 is Retail\n    3 is Banking\n    4 is Insurance\n    5 is Food Delivery\n    6 is Transport\n    7 is Services\n    8 is Education\n    9 is Publisher\n    10 is Health & Fitness\n    11 is Fashion\n    12 is Restaurant\n    13 is Telecommunication"
           },
           "website": {
-            "type": "string"
+            "type": "string",
+            "description": "Your company website"
           },
           "role": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Your position in this company such as CEO, CMO, Marketer, Developer"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "AuthorizeCompany": {
         "required": [
@@ -3525,15 +3531,19 @@
         }
       },
       "NewUser-profile": {
+        "type": "object",
         "properties": {
           "firstName": {
-            "type": "string"
+            "type": "string",
+            "description": "Your first name"
           },
           "lastName": {
-            "type": "string"
+            "type": "string",
+            "description": "Your last name"
           },
           "phoneNumber": {
-            "type": "string"
+            "type": "string",
+            "description": "Your phone number"
           }
         }
       },
