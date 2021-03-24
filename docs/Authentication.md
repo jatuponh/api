@@ -4,7 +4,7 @@ This page describes the authentication methods that you need to implement when m
 
 We have 2 kinds of authentication methods.
 
-## 1.) Access Token
+### 1.) Access Token
 
 An ACCESS TOKEN is gotten when you signed in at Hub Space console. The ACCESS TOKEN is mostly used by Hub Space console for creating company, product, coupon, etc.
 
@@ -12,7 +12,7 @@ An ACCESS TOKEN is gotten when you signed in at Hub Space console. The ACCESS TO
 curl -H 'Accept: application/json' -H "Authorization: Bearer ${ACCESS TOKEN}" -X GET https://api.hubspace.co.th/${PATH}
 ```
 
-## 2.) API Key
+### 2.) API Key
 
 For server-to-server authentication, we use API KEY. API KEY is used for validate coupon, redeem coupon, rollback coupon, etc.
 
